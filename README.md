@@ -10,18 +10,18 @@ The purpose of this assignment is for you to become more familiar with how kerne
 
 Logistics: The only “hand-in” will be electronic. Any clarifications and revisions to the assignment will be modified here and announced to the class during class or via Canvas.
 
+## Kernel Modules
+There are two main ways to add code to the Linux kernel. One way is to choose or add code to compile into the kernel during the compilation process. The other method is to add the code to the Linux kernel while it is running, which is what a loadable kernel module is [8].
+
+For more information on Linux kernel modules, I highly recommend reading this extremely good introduction to Linux Loadable Kernel Modules and how they are commonly used:
+[http://www.tldp.org/HOWTO/Module-HOWTO/x73.html](http://www.tldp.org/HOWTO/Module-HOWTO/x73.html)
+
 ## Hand Out Instructions
 For this assignment you will want to use a virtual machine (VM). If you are running a native install of 64bit Ubuntu 22.04 LTS, you should be able to do this without using a VM; however, I would recommend using a VM as we are going to be modifying privileged code and you could potentially corrupt your native system if you are not using a VM.
 
 To complete this assignment, one of the steps is to **Compile Hello World kernel module** -- there is a provided set of files for the hello world kernel module that you should build first to familiarize yourself with the basics of compiling & installing a compiled kernel module. When you get to this step, you can access these files with either of the following options (see the [Compile Hello World kernel module](#compile-hello-world-kernel-module) step for more details):
 - Download [https://www.bryancdixon.com/static/helloworld.tar](https://www.bryancdixon.com/static/helloworld.tar) -- download the provided tar file
 - Download ZIP -- download a ZIP file of this CSCI440-KernelHacking repository
-
-## Kernel Modules
-There are two main ways to add code to the Linux kernel. One way is to choose or add code to compile into the kernel during the compilation process. The other method is to add the code to the Linux kernel while it is running, which is what a loadable kernel module is [8].
-
-For more information on Linux kernel modules, I highly recommend reading this extremely good introduction to Linux Loadable Kernel Modules and how they are commonly used:
-[http://www.tldp.org/HOWTO/Module-HOWTO/x73.html](http://www.tldp.org/HOWTO/Module-HOWTO/x73.html)
 
 ## Your Task
 This is a general overview of what you will be doing for this assignment:
