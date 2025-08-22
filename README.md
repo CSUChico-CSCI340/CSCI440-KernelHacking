@@ -53,7 +53,9 @@ $ sudo apt-get install build-essential debhelper gcc-12
 
 These commands update the package list to make sure we have the most up-to-date list of packages, install the latest versions of all installed software, install some general-purpose build tools, and finally install the build dependencies for the Linux kernel itself.  
 
-The sudo in the previous commands indicate we are invoking the given commands as the root user. sudo only works if your user account has sudoer privileges; if not, you will receive a message indicating the user is not in the sudoers file. This is usually not an issue in standard installation, but if you encounter this message, it is simple to give the current user permission to run commands with sudo [2].
+The `sudo` in the previous commands indicate we are invoking the given commands as the root user. `sudo` only works if your user account has sudoer privileges; if not, you will receive a message indicating the user is not in the sudoers file. This is usually not an issue in standard installation, but if you encounter this message, it is simple to give the current user permission to run commands with `sudo` [2].
+
+Next, create a directory for your Kernel Assignment. I recommend that you clone your CSCI440 repo to your Linux machine and make the directory inside of your CSCI440 repo. After creating the directory, move into the directory for the next steps.
 
 ```bash
 ~$ mkdir kernel-assignment
@@ -62,17 +64,17 @@ The sudo in the previous commands indicate we are invoking the given commands as
 ```
 
 ## Compile Hello World kernel module
-Now let’s get the Hello World kernel module source and Makefile files and work on compiling a Linux kernel module. You will need to download the helloworld.tar file from my website:
+Now let’s get the Hello World kernel module source and Makefile files and work on compiling a Linux kernel module. You will need to download the helloworld.tar file from my website (using the wget command below):
 
 [https://www.bryancdixon.com/static/helloworld.tar](https://www.bryancdixon.com/static/helloworld.tar)
-
-Or, you can choose the Download ZIP option and download these files from this CSCI440-KernelHacking repo. For more detailed instructions for completing this option, look in the [CSCI440-Course-Materials/Assignments.md](https://github.com/shelleywong/CSCI440-Course-Materials/blob/main/Assignments.md).
 
 You could download the file from the link above to your local computer, but I would recommend downloading it directly to your Ubuntu VM so you can make use of it with having to worry about copying the files onto the VM. To do this you can use the `wget` command with that URL as the argument to the command and it’ll download the helloworld.tar file to your current working directory. (If you do download the files locally, you can use secure copy protocol (the Linux `scp` command) or another option that supports Secure File Transfer Protocol (SFTP) to get the files to your Ubuntu VM).
 
 ```bash
 ~$ wget https://www.bryancdixon.com/static/helloworld.tar
 ```
+
+Alternatively, you can choose the Download ZIP option and download these files from this CSCI440-KernelHacking repo. For more detailed instructions for completing this option, look in the [CSCI440-Course-Materials/Assignments.md](https://github.com/shelleywong/CSCI440-Course-Materials/blob/main/Assignments.md).
 
 Once you have the tar file you will want to extract it:
 
@@ -83,9 +85,9 @@ x helloworld/hello.c
 x helloworld/Makefile
 ```
 
-You should now have a helloworld folder in your current working directory. At this point you’ll want to likely take a look at the helloworld.c source file and the Makefile to familiarize yourself with the workings of these two files. These two files are also a good starting point for the final part of this assignment.
+You should now have a `helloworld` folder in your current working directory. At this point you’ll want to likely take a look at the helloworld.c source file and the Makefile to familiarize yourself with the workings of these two files. These two files are also a good starting point for the final part of this assignment.
 
-To build the Hello World kernel module you will need to change your working directory to be in the helloworld folder. Building kernel module is as simple as just typing make:
+To build the Hello World kernel module you will need to change your working directory to be in the `helloworld` folder. Building kernel module is as simple as just typing make:
 
 ```bash
 $ cd helloworld
@@ -100,7 +102,7 @@ hello.c  hello.ko  hello.mod.c  hello.mod.o  hello.o
 Makefile  modules.order  Module.symvers
 ```
 
-The only generated file that we care about is the hello.ko file, which is a kernel object file. We can now install the generated helloworld kernel module by using the insmod command:
+Other files may be built besides the ones shown above. The only generated file that we care about is the hello.ko file, which is a kernel object file. We can now install the generated helloworld kernel module by using the `insmod` command:
 
 ```bash
 ~/helloworld$ sudo insmod hello.ko
@@ -111,7 +113,7 @@ The only generated file that we care about is the hello.ko file, which is a kern
 [ 6819.571911] Cleaning up module.
 ```
 
-In the above example, I inserted the Hello World kernel module with the insmod command, immediately removed it with the rmmod command, and finally inspected the dmesg output to find the printk statements that printed ”Hello World!” when the module was installed and the cleanup message when the module was removed. In the above output, this process completed successfully.
+In the above example, I inserted the Hello World kernel module with the `insmod` command, immediately removed it with the `rmmod` command, and finally inspected the dmesg output to find the printk statements that printed ”Hello World!” when the module was installed and the cleanup message when the module was removed. In the above output, this process completed successfully.
 You may see a warning in the dmesg output:
 
 ```bash
