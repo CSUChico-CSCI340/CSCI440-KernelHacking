@@ -40,11 +40,9 @@ Your first step will be to download and install Ubuntu 22.04 64bit [6] onto your
 - If you are using a VM on your local machine (e.g. VMWare, VirtualBox), the Desktop and Server variants of Ubuntu will both work, but the [Server](https://ubuntu.com/download/server) variant is recommended because it requires less disk space).
 - If you are using a [Compute Engine VM instance](https://console.cloud.google.com/compute) through Google Cloud Console, you should be able to create an instance with an Ubuntu 22.04 LTS x86/64 image (no need to download separately).
 
-Some instructions for setting up a Google Cloud Compute Engine VM instance will be provided during lab. If you need additional assistance with this step, please ask me to show you in lab or come to my office hours. 
+Some instructions for setting up a Google Cloud Compute Engine VM instance will be provided during lab. If you need additional assistance with this step, please ask me to show you in lab or come to my office hours.
 
-Once Ubuntu is installed, its possible you may need to correct your apt sources list (*/etc/apt/sources.list*) if you are using the server version of Ubuntu 22.04 as it might have the cdrom sources still enabled. It's also possible that the sources list does not include the source code options, so you'll likely need to uncomment the *deb-src* links in the sources file. If your *sources.list* file only has a few lines you might need a more complete sources.list file like the one [here](https://gist.github.com/javawolfpack/9af9520c8e09930315a5dd45088547d4). In this way, we ensure all the necessary tools to download, build, and install the new Linux kernel are available on the system. 
-
-Next, You will need to set up the installation’s build environment by running the following commands in a terminal window (make sure your *sources.list* is updated before doing these steps):
+Next, You will need to set up the installation’s build environment by running the following commands in a terminal window:
 
 ```bash
 $ sudo apt-get update
@@ -57,24 +55,9 @@ These commands update the package list to make sure we have the most up-to-date 
 
 The sudo in the previous commands indicate we are invoking the given commands as the root user. sudo only works if your user account has sudoer privileges; if not, you will receive a message indicating the user is not in the sudoers file. This is usually not an issue in standard installation, but if you encounter this message, it is simple to give the current user permission to run commands with sudo [2].
 
-Once the build environment is set up, you will want access to the source code for the Linux kernel you are currently running (we aren’t trying to compile and install a newer kernel, just re-compile the current kernel). Downloading the source code for the Linux kernel is a simple process, and very common for people who are running user-built (instead of package-maintained) Linux distros. Gentoo Linux is an example of such a distro if you are interested [3].
-
-If you are using a newer version of Ubuntu (24.04 or later), the `apt-get source linux-image-$(uname -r)` command will not work, but you can still access the Linux source code (look for Hints 8 and 9 in this document).
-
-If you would like to get the source code for the currently running Linux kernel on Ubuntu 22.04, you can use apt-get, which will obtain the source for a specific binary package it provides:
-
 ```bash
 ~$ mkdir kernel-assignment
 ~$ cd kernel-assignment
-~/kernel-assignment$ apt-get source linux-image-$(uname -r)
-Reading package lists... Done
-Picking 'linux-signed' as source package instead of 'linux-image-5.4.0-31-generic'
-Need to get 20.5 kB of source archives.
-Get:1 http://us.archive.ubuntu.com/ubuntu focal-updates/main linux-signed 5.4.0-31.35 (dsc) [2,179 B]
-Get:2 http://us.archive.ubuntu.com/ubuntu focal-updates/main linux-signed 5.4.0-31.35 (tar) [18.3 kB]
-Fetched 20.5 kB in 0s (42.6 kB/s)
-dpkg-source: info: extracting linux-signed in linux-signed-5.4.0
-dpkg-source: info: unpacking linux-signed_5.4.0-31.35.tar.xz
 ~/kernel-assignment$ 
 ```
 
